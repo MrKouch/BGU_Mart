@@ -66,3 +66,9 @@ class Dao(object):
                .format(self._table_name,' AND '.join([col + '=?' for col in column_names]))
  
         self._conn.cursor().execute(stmt, params)
+    
+    def print(self):
+        cursor = self._conn.cursor()
+        cursor.execute(f"SELECT * FROM {self._dto_type.__name__.lower()} ORDER BY id")
+        for row in cursor.fetchall():
+            print(row)
